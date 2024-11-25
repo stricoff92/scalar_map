@@ -46,6 +46,9 @@ void test_u8_sm(void) {
     sm_u8_get(u8h, 87667, v, found);
     assert(!found);
 
+    sm_u8_dget(u8h, 654, v, 42);
+    assert(v == 42);
+
     sm_u8_destroy(u8h);
     TEST_PASSED
 }
@@ -72,6 +75,7 @@ void test_i8_sm(void) {
 
     sm_i8_get(i8h, 87667, v, found);
     assert(!found);
+
 
     sm_i8_destroy(i8h);
     TEST_PASSED
