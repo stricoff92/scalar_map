@@ -49,15 +49,17 @@ void test_sm_set_and_get_values(void) {
     sm_set(sm_int, h, 1866, 5687);
 
     int32_t v;
-    bool found;
+    bool found = false;
     sm_get(sm_int, h, 1864, v, found);
     assert(found);
     assert(v == 2354);
 
+    found = false;
     sm_get(sm_int, h, 1865, v, found);
     assert(found);
     assert(v == 6577);
 
+    found = false;
     sm_get(sm_int, h, 1866, v, found);
     assert(found);
     assert(v == 5687);
@@ -77,13 +79,15 @@ void test_sm_get_missing_keys_are_not_found(void) {
     sm_set(sm_int, h, 1866, 5687);
 
     int32_t v;
-    bool found;
+    bool found = true;
     sm_get(sm_int, h, 1867, v, found);
     assert(!found);
 
+    found = true;
     sm_get(sm_int, h, 1868, v, found);
     assert(!found);
 
+    found = true;
     sm_get(sm_int, h, 1869, v, found);
     assert(!found);
 
