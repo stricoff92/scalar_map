@@ -9,16 +9,16 @@
 
 #define float_equal(a, b) (fabs(a - b) < 0.0001)
 
-define_sm_u8
-define_sm_i8
-define_sm_u16
-define_sm_i16
-define_sm_u32
-define_sm_i32
-define_sm_u64
-define_sm_i64
-define_sm_f32
-define_sm_f64
+init_sm_u8
+init_sm_i8
+init_sm_u16
+init_sm_i16
+init_sm_u32
+init_sm_i32
+init_sm_u64
+init_sm_i64
+init_sm_f32
+init_sm_f64
 
 #define TEST_STARTING printf("running test %s... ", __func__);
 #define TEST_PASSED printf("ok\n");
