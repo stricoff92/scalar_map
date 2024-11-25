@@ -3,9 +3,6 @@
 #ifndef SCALAR_MAP_H
 #define SCALAR_MAP_H
 
-#include <stdint.h>
-#include <stdbool.h>
-
 #include "khash.h"
 
 #define sm_t(name) khash_t(name)
