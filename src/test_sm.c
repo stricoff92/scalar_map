@@ -3,105 +3,309 @@
 #include <stdio.h>
 #include <assert.h>
 #include <stdint.h>
+#include <math.h>
 
 #include "scalar_map.h"
 
-sm_define(sm_int, int32_t)
-sm_define(sm_uint, uint32_t)
-sm_define(sm_float, float)
-sm_define(sm_double, double)
+#define float_equal(a, b) (fabs(a - b) < 0.0001)
 
+define_sm_u8
+define_sm_i8
+define_sm_u16
+define_sm_i16
+define_sm_u32
+define_sm_i32
+define_sm_u64
+define_sm_i64
+define_sm_f32
+define_sm_f64
 
 #define TEST_STARTING printf("running test %s... ", __func__);
 #define TEST_PASSED printf("ok\n");
 
-
-void test_sm_create(void) {
+void test_u8_sm(void) {
     TEST_STARTING
+    sm_u8_t *u8h = sm_u8_create();
+    assert(u8h);
+    bool found;
+    uint8_t v;
+    sm_u8_set(u8h, 76576, 125);
+    sm_u8_set(u8h, 76577, 126);
+    sm_u8_set(u8h, 76578, 232);
 
-    sm_t(sm_int) *h = sm_create(sm_int);
-    assert(h != NULL);
-    sm_destroy(sm_int, h);
+    sm_u8_get(u8h, 76576, v, found);
+    assert(found);
+    assert(v == 125);
+    sm_u8_get(u8h, 76577, v, found);
+    assert(found);
+    assert(v == 126);
+    sm_u8_get(u8h, 76578, v, found);
+    assert(found);
+    assert(v == 232);
 
-    sm_t(sm_uint) *h2 = sm_create(sm_uint);
-    assert(h2 != NULL);
-    sm_destroy(sm_uint, h2);
+    sm_u8_get(u8h, 87667, v, found);
+    assert(!found);
 
-    sm_t(sm_float) *h3 = sm_create(sm_float);
-    assert(h3 != NULL);
-    sm_destroy(sm_float, h3);
-
-    sm_t(sm_double) *h4 = sm_create(sm_double);
-    assert(h4 != NULL);
-    sm_destroy(sm_double, h4);
-
+    sm_u8_destroy(u8h);
     TEST_PASSED
 }
 
-void test_sm_set_and_get_values(void) {
+void test_i8_sm(void) {
     TEST_STARTING
+    sm_i8_t *i8h = sm_i8_create();
+    assert(i8h);
+    bool found;
+    int8_t v;
+    sm_i8_set(i8h, 76576, 125);
+    sm_i8_set(i8h, 76577, 126);
+    sm_i8_set(i8h, 76578, -98);
 
-    sm_t(sm_int) *h = sm_create(sm_int);
-    assert(h);
+    sm_i8_get(i8h, 76576, v, found);
+    assert(found);
+    assert(v == 125);
+    sm_i8_get(i8h, 76577, v, found);
+    assert(found);
+    assert(v == 126);
+    sm_i8_get(i8h, 76578, v, found);
+    assert(found);
+    assert(v == -98);
 
-    sm_set(sm_int, h, 1864, 2354);
-    sm_set(sm_int, h, 1865, 6577);
-    sm_set(sm_int, h, 1866, 5687);
+    sm_i8_get(i8h, 87667, v, found);
+    assert(!found);
 
+    sm_i8_destroy(i8h);
+    TEST_PASSED
+}
+
+
+void test_u16_sm(void) {
+    TEST_STARTING
+    sm_u16_t *u16h = sm_u16_create();
+    assert(u16h);
+    bool found;
+    uint16_t v;
+    sm_u16_set(u16h, 76576, 125);
+    sm_u16_set(u16h, 76577, 54214);
+    sm_u16_set(u16h, 76578, 232);
+
+    sm_u16_get(u16h, 76576, v, found);
+    assert(found);
+    assert(v == 125);
+    sm_u16_get(u16h, 76577, v, found);
+    assert(found);
+    assert(v == 54214);
+    sm_u16_get(u16h, 76578, v, found);
+    assert(found);
+    assert(v == 232);
+
+    sm_u16_get(u16h, 87667, v, found);
+    assert(!found);
+
+    sm_u16_destroy(u16h);
+    TEST_PASSED
+}
+
+void test_i16_sm(void) {
+    TEST_STARTING
+    sm_i16_t *i16h = sm_i16_create();
+    assert(i16h);
+    bool found;
+    int16_t v;
+    sm_i16_set(i16h, 76576, 28541);
+    sm_i16_set(i16h, 76577, -31254);
+    sm_i16_set(i16h, 76578, 232);
+
+    sm_i16_get(i16h, 76576, v, found);
+    assert(found);
+    assert(v == 28541);
+    sm_i16_get(i16h, 76577, v, found);
+    assert(found);
+    assert(v == -31254);
+    sm_i16_get(i16h, 76578, v, found);
+    assert(found);
+    assert(v == 232);
+
+    sm_i16_get(i16h, 87667, v, found);
+    assert(!found);
+
+    sm_i16_destroy(i16h);
+    TEST_PASSED
+}
+
+void test_u32_sm(void) {
+    TEST_STARTING
+    sm_u32_t *u32h = sm_u32_create();
+    assert(u32h);
+    bool found;
+    uint32_t v;
+    sm_u32_set(u32h, 76576, 3543654654);
+    sm_u32_set(u32h, 76577, 54214);
+    sm_u32_set(u32h, 76578, 232);
+
+    sm_u32_get(u32h, 76576, v, found);
+    assert(found);
+    assert(v == 3543654654);
+    sm_u32_get(u32h, 76577, v, found);
+    assert(found);
+    assert(v == 54214);
+    sm_u32_get(u32h, 76578, v, found);
+    assert(found);
+    assert(v == 232);
+
+    sm_u32_get(u32h, 87667, v, found);
+    assert(!found);
+
+    sm_u32_destroy(u32h);
+    TEST_PASSED
+}
+
+void test_i32_sm(void) {
+    TEST_STARTING
+    sm_i32_t *i32h = sm_i32_create();
+    assert(i32h);
+    bool found;
     int32_t v;
-    bool found = false;
-    sm_get(sm_int, h, 1864, v, found);
-    assert(found);
-    assert(v == 2354);
+    sm_i32_set(i32h, 76576, 1543654654);
+    sm_i32_set(i32h, 76577, -1543654654);
+    sm_i32_set(i32h, 76578, 232);
 
-    found = false;
-    sm_get(sm_int, h, 1865, v, found);
+    sm_i32_get(i32h, 76576, v, found);
     assert(found);
-    assert(v == 6577);
-
-    found = false;
-    sm_get(sm_int, h, 1866, v, found);
+    assert(v == 1543654654);
+    sm_i32_get(i32h, 76577, v, found);
     assert(found);
-    assert(v == 5687);
+    assert(v == -1543654654);
+    sm_i32_get(i32h, 76578, v, found);
+    assert(found);
+    assert(v == 232);
 
-    sm_destroy(sm_int, h);
+    sm_i32_get(i32h, 87667, v, found);
+    assert(!found);
+
+    sm_i32_destroy(i32h);
     TEST_PASSED
 }
 
-void test_sm_get_missing_keys_are_not_found(void) {
+void test_u64_sm(void) {
     TEST_STARTING
+    sm_u64_t *u64h = sm_u64_create();
+    assert(u64h);
+    bool found;
+    uint64_t v;
+    sm_u64_set(u64h, 76576, 3543654654);
+    sm_u64_set(u64h, 76577, 54214);
+    sm_u64_set(u64h, 76578, 232);
 
-    sm_t(sm_int) *h = sm_create(sm_int);
-    assert(h);
+    sm_u64_get(u64h, 76576, v, found);
+    assert(found);
+    assert(v == 3543654654);
+    sm_u64_get(u64h, 76577, v, found);
+    assert(found);
+    assert(v == 54214);
+    sm_u64_get(u64h, 76578, v, found);
+    assert(found);
+    assert(v == 232);
 
-    sm_set(sm_int, h, 1864, 2354);
-    sm_set(sm_int, h, 1865, 6577);
-    sm_set(sm_int, h, 1866, 5687);
-
-    int32_t v;
-    bool found = true;
-    sm_get(sm_int, h, 1867, v, found);
+    sm_u64_get(u64h, 87667, v, found);
     assert(!found);
 
-    found = true;
-    sm_get(sm_int, h, 1868, v, found);
-    assert(!found);
-
-    found = true;
-    sm_get(sm_int, h, 1869, v, found);
-    assert(!found);
-
-    sm_destroy(sm_int, h);
+    sm_u64_destroy(u64h);
     TEST_PASSED
 }
 
+void test_i64_sm(void) {
+    TEST_STARTING
+    sm_i64_t *i64h = sm_i64_create();
+    assert(i64h);
+    bool found;
+    int64_t v;
+    sm_i64_set(i64h, 76576, 1543654654);
+    sm_i64_set(i64h, 76577, -1543654654);
+    sm_i64_set(i64h, 76578, 232);
+
+    sm_i64_get(i64h, 76576, v, found);
+    assert(found);
+    assert(v == 1543654654);
+    sm_i64_get(i64h, 76577, v, found);
+    assert(found);
+    assert(v == -1543654654);
+    sm_i64_get(i64h, 76578, v, found);
+    assert(found);
+    assert(v == 232);
+
+    sm_i64_get(i64h, 87667, v, found);
+    assert(!found);
+
+    sm_i64_destroy(i64h);
+    TEST_PASSED
+}
+
+void test_f32_sm(void) {
+    TEST_STARTING
+    sm_f32_t *f32h = sm_f32_create();
+    assert(f32h);
+    bool found;
+    float v;
+    sm_f32_set(f32h, 76576, 43523.32F);
+    sm_f32_set(f32h, 76577, -543.54F);
+    sm_f32_set(f32h, 76578, 12312.543F);
+
+    sm_f32_get(f32h, 76576, v, found);
+    assert(found);
+    assert(float_equal(v, 43523.32F));
+    sm_f32_get(f32h, 76577, v, found);
+    assert(found);
+    assert(float_equal(v, -543.54F));
+    sm_f32_get(f32h, 76578, v, found);
+    assert(found);
+    assert(float_equal(v, 12312.543F));
+
+    sm_f32_get(f32h, 87667, v, found);
+    assert(!found);
+
+    sm_f32_destroy(f32h);
+    TEST_PASSED
+}
+
+void test_f64_sm(void) {
+    TEST_STARTING
+    sm_f64_t *f64h = sm_f64_create();
+    assert(f64h);
+    bool found;
+    double v;
+    sm_f64_set(f64h, 76576, 43523.32F);
+    sm_f64_set(f64h, 76577, -543.54F);
+    sm_f64_set(f64h, 76578, 12312.543F);
+
+    sm_f64_get(f64h, 76576, v, found);
+    assert(found);
+    assert(float_equal(v, 43523.32F));
+    sm_f64_get(f64h, 76577, v, found);
+    assert(found);
+    assert(float_equal(v, -543.54F));
+    sm_f64_get(f64h, 76578, v, found);
+    assert(found);
+    assert(float_equal(v, 12312.543F));
+
+    sm_f64_get(f64h, 87667, v, found);
+    assert(!found);
+
+    sm_f64_destroy(f64h);
+    TEST_PASSED
+}
 
 int main() {
 
-    test_sm_create();
-
-    test_sm_set_and_get_values();
-    test_sm_get_missing_keys_are_not_found();
+    test_u8_sm();
+    test_i8_sm();
+    test_u16_sm();
+    test_i16_sm();
+    test_u32_sm();
+    test_i32_sm();
+    test_u64_sm();
+    test_i64_sm();
+    test_f32_sm();
+    test_f64_sm();
 
     return 0;
 }

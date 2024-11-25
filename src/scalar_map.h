@@ -7,6 +7,18 @@
 
 #define sm_t(name) khash_t(name)
 #define sm_define(name, type) KHASH_MAP_INIT_INT(name, type)
+
+#define define_sm_u8 sm_define(sm_u8, uint8_t)
+#define define_sm_i8 sm_define(sm_i8, int8_t)
+#define define_sm_u16 sm_define(sm_u16, uint16_t)
+#define define_sm_i16 sm_define(sm_i16, int16_t)
+#define define_sm_u32 sm_define(sm_u32, uint32_t)
+#define define_sm_i32 sm_define(sm_i32, int32_t)
+#define define_sm_u64 sm_define(sm_u64, uint64_t)
+#define define_sm_i64 sm_define(sm_i64, int64_t)
+#define define_sm_f32 sm_define(sm_f32, float)
+#define define_sm_f64 sm_define(sm_f64, double)
+
 #define sm_create(name) kh_init(name)
 #define sm_destroy(name, h) kh_destroy(name, h)
 #define sm_get(name, h, k, v, found) \
@@ -22,4 +34,66 @@
         kh_val(h, sm_i) = v; \
     } while (0)
 
+
+#define sm_u8_t sm_t(sm_u8)
+#define sm_u8_create() sm_create(sm_u8)
+#define sm_u8_destroy(h) sm_destroy(sm_u8, h)
+#define sm_u8_get(h, k, v, found) sm_get(sm_u8, h, k, v, found)
+#define sm_u8_set(h, k, v) sm_set(sm_u8, h, k, v)
+
+#define sm_i8_t sm_t(sm_i8)
+#define sm_i8_create() sm_create(sm_i8)
+#define sm_i8_destroy(h) sm_destroy(sm_i8, h)
+#define sm_i8_get(h, k, v, found) sm_get(sm_i8, h, k, v, found)
+#define sm_i8_set(h, k, v) sm_set(sm_i8, h, k, v)
+
+#define sm_u16_t sm_t(sm_u16)
+#define sm_u16_create() sm_create(sm_u16)
+#define sm_u16_destroy(h) sm_destroy(sm_u16, h)
+#define sm_u16_get(h, k, v, found) sm_get(sm_u16, h, k, v, found)
+#define sm_u16_set(h, k, v) sm_set(sm_u16, h, k, v)
+
+#define sm_i16_t sm_t(sm_i16)
+#define sm_i16_create() sm_create(sm_i16)
+#define sm_i16_destroy(h) sm_destroy(sm_i16, h)
+#define sm_i16_get(h, k, v, found) sm_get(sm_i16, h, k, v, found)
+#define sm_i16_set(h, k, v) sm_set(sm_i16, h, k, v)
+
+#define sm_u32_t sm_t(sm_u32)
+#define sm_u32_create() sm_create(sm_u32)
+#define sm_u32_destroy(h) sm_destroy(sm_u32, h)
+#define sm_u32_get(h, k, v, found) sm_get(sm_u32, h, k, v, found)
+#define sm_u32_set(h, k, v) sm_set(sm_u32, h, k, v)
+
+#define sm_i32_t sm_t(sm_i32)
+#define sm_i32_create() sm_create(sm_i32)
+#define sm_i32_destroy(h) sm_destroy(sm_i32, h)
+#define sm_i32_get(h, k, v, found) sm_get(sm_i32, h, k, v, found)
+#define sm_i32_set(h, k, v) sm_set(sm_i32, h, k, v)
+
+#define sm_u64_t sm_t(sm_u64)
+#define sm_u64_create() sm_create(sm_u64)
+#define sm_u64_destroy(h) sm_destroy(sm_u64, h)
+#define sm_u64_get(h, k, v, found) sm_get(sm_u64, h, k, v, found)
+#define sm_u64_set(h, k, v) sm_set(sm_u64, h, k, v)
+
+#define sm_i64_t sm_t(sm_i64)
+#define sm_i64_create() sm_create(sm_i64)
+#define sm_i64_destroy(h) sm_destroy(sm_i64, h)
+#define sm_i64_get(h, k, v, found) sm_get(sm_i64, h, k, v, found)
+#define sm_i64_set(h, k, v) sm_set(sm_i64, h, k, v)
+
+#define sm_f32_t sm_t(sm_f32)
+#define sm_f32_create() sm_create(sm_f32)
+#define sm_f32_destroy(h) sm_destroy(sm_f32, h)
+#define sm_f32_get(h, k, v, found) sm_get(sm_f32, h, k, v, found)
+#define sm_f32_set(h, k, v) sm_set(sm_f32, h, k, v)
+
+#define sm_f64_t sm_t(sm_f64)
+#define sm_f64_create() sm_create(sm_f64)
+#define sm_f64_destroy(h) sm_destroy(sm_f64, h)
+#define sm_f64_get(h, k, v, found) sm_get(sm_f64, h, k, v, found)
+#define sm_f64_set(h, k, v) sm_set(sm_f64, h, k, v)
+
 #endif // SCALAR_MAP_H
+
