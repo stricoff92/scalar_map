@@ -15,12 +15,8 @@
 #define sm_get(name, h, k, v, found) \
     do { \
         khint_t sm_i = kh_get(name, h, k); \
-        if (sm_i == kh_end(h)) \
-            found = false; \
-        else { \
-            v = kh_val(h, sm_i); \
-            found = true; \
-        } \
+        found = sm_i != kh_end(h); \
+        if (found) v = kh_val(h, sm_i); \
     } while (0)
 #define sm_set(name, h, k, v) \
     do { \

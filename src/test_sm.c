@@ -62,10 +62,11 @@ void test_sm_set_and_get_values(void) {
     assert(found);
     assert(v == 5687);
 
+    sm_destroy(sm_int, h);
     TEST_PASSED
 }
 
-void test_sm_get_keys_are_not_found(void) {
+void test_sm_get_missing_keys_are_not_found(void) {
     TEST_STARTING
 
     sm_t(sm_int) *h = sm_create(sm_int);
@@ -86,7 +87,7 @@ void test_sm_get_keys_are_not_found(void) {
     sm_get(sm_int, h, 1869, v, found);
     assert(!found);
 
-
+    sm_destroy(sm_int, h);
     TEST_PASSED
 }
 
@@ -96,7 +97,7 @@ int main() {
     test_sm_create();
 
     test_sm_set_and_get_values();
-    test_sm_get_keys_are_not_found();
+    test_sm_get_missing_keys_are_not_found();
 
     return 0;
 }
