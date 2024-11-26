@@ -58,7 +58,7 @@
 #define sm_u16_create() sm_create(sm_u16)
 #define sm_u16_destroy(h) sm_destroy(sm_u16, h)
 #define sm_u16_get(h, k, v, found) sm_get(sm_u16, h, k, v, found)
-#define sm_i16_dget(h, k, v, d) sm_dget(sm_i16, h, k, v, d)
+#define sm_u16_dget(h, k, v, d) sm_dget(sm_u16, h, k, v, d)
 #define sm_u16_set(h, k, v) sm_set(sm_u16, h, k, v)
 
 #define sm_i16_t sm_t(sm_i16)

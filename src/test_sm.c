@@ -78,6 +78,10 @@ void test_i8_sm(void) {
     sm_i8_get(i8h, 87667, v, found);
     assert(!found);
 
+    sm_i8_dget(i8h, 76577, v, 42);
+    assert(v == 126);
+    sm_i8_dget(i8h, 654, v, 42);
+    assert(v == 42);
 
     sm_i8_destroy(i8h);
     TEST_PASSED
@@ -107,6 +111,11 @@ void test_u16_sm(void) {
     sm_u16_get(u16h, 87667, v, found);
     assert(!found);
 
+    sm_u16_dget(u16h, 76577, v, 42);
+    assert(v == 54214);
+    sm_u16_dget(u16h, 654, v, 42);
+    assert(v == 42);
+
     sm_u16_destroy(u16h);
     TEST_PASSED
 }
@@ -133,6 +142,11 @@ void test_i16_sm(void) {
 
     sm_i16_get(i16h, 87667, v, found);
     assert(!found);
+
+    sm_i16_dget(i16h, 76577, v, 42);
+    assert(v == -31254);
+    sm_i16_dget(i16h, 654, v, 42);
+    assert(v == 42);
 
     sm_i16_destroy(i16h);
     TEST_PASSED
@@ -161,6 +175,11 @@ void test_u32_sm(void) {
     sm_u32_get(u32h, 87667, v, found);
     assert(!found);
 
+    sm_u32_dget(u32h, 76577, v, 42);
+    assert(v == 54214);
+    sm_u32_dget(u32h, 654, v, 42);
+    assert(v == 42);
+
     sm_u32_destroy(u32h);
     TEST_PASSED
 }
@@ -187,6 +206,11 @@ void test_i32_sm(void) {
 
     sm_i32_get(i32h, 87667, v, found);
     assert(!found);
+
+    sm_i32_dget(i32h, 76577, v, 42);
+    assert(v == -1543654654);
+    sm_i32_dget(i32h, 654, v, 42);
+    assert(v == 42);
 
     sm_i32_destroy(i32h);
     TEST_PASSED
@@ -215,6 +239,11 @@ void test_u64_sm(void) {
     sm_u64_get(u64h, 87667, v, found);
     assert(!found);
 
+    sm_u64_dget(u64h, 76577, v, 42);
+    assert(v == 54214);
+    sm_u64_dget(u64h, 654, v, 42);
+    assert(v == 42);
+
     sm_u64_destroy(u64h);
     TEST_PASSED
 }
@@ -241,6 +270,11 @@ void test_i64_sm(void) {
 
     sm_i64_get(i64h, 87667, v, found);
     assert(!found);
+
+    sm_i64_dget(i64h, 76577, v, 42);
+    assert(v == -1543654654);
+    sm_i64_dget(i64h, 654, v, 42);
+    assert(v == 42);
 
     sm_i64_destroy(i64h);
     TEST_PASSED
@@ -269,6 +303,11 @@ void test_f32_sm(void) {
     sm_f32_get(f32h, 87667, v, found);
     assert(!found);
 
+    sm_f32_dget(f32h, 76577, v, 42);
+    assert(float_equal(v, -543.54F));
+    sm_f32_dget(f32h, 654, v, 42);
+    assert(float_equal(v, 42));
+
     sm_f32_destroy(f32h);
     TEST_PASSED
 }
@@ -279,22 +318,27 @@ void test_f64_sm(void) {
     assert(f64h);
     bool found;
     double v;
-    sm_f64_set(f64h, 76576, 43523.32F);
-    sm_f64_set(f64h, 76577, -543.54F);
-    sm_f64_set(f64h, 76578, 12312.543F);
+    sm_f64_set(f64h, 76576, 43523.32);
+    sm_f64_set(f64h, 76577, -543.54);
+    sm_f64_set(f64h, 76578, 12312.543);
 
     sm_f64_get(f64h, 76576, v, found);
     assert(found);
-    assert(float_equal(v, 43523.32F));
+    assert(float_equal(v, 43523.32));
     sm_f64_get(f64h, 76577, v, found);
     assert(found);
-    assert(float_equal(v, -543.54F));
+    assert(float_equal(v, -543.54));
     sm_f64_get(f64h, 76578, v, found);
     assert(found);
-    assert(float_equal(v, 12312.543F));
+    assert(float_equal(v, 12312.543));
 
     sm_f64_get(f64h, 87667, v, found);
     assert(!found);
+
+    sm_f64_dget(f64h, 76577, v, 42);
+    assert(float_equal(v, -543.54));
+    sm_f64_dget(f64h, 654, v, 42);
+    assert(float_equal(v, 42));
 
     sm_f64_destroy(f64h);
     TEST_PASSED
